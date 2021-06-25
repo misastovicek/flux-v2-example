@@ -1,0 +1,32 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: aad-pod-identity
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: aad-pod-identity
+  namespace: aad-pod-identity
+spec:
+  releaseName: aadpodidentity
+  targetNamespace: aad-pod-identity
+  interval: 10m
+  chart:
+    spec:
+      chart: aad-pod-identity
+      sourceRef:
+        kind: HelmRepository
+        name: aad-pod-identity
+        namespace: flux-system
+  values:
+    azureIdentities:
+      kv-access:
+        namespace: flux-system
+        type: 0
+        resourceID: "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/rg-mstov-aks/providers/Microsoft.ManagedIdentity/userAssignedIdentities/flux-cd"
+        clientID: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+        binding:
+          name: kv-access
+          selector: kv-access

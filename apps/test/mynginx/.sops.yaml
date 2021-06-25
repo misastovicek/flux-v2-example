@@ -1,0 +1,4 @@
+creation_rules:
+  - path_regex: .*.yaml
+    encrypted_regex: ^(tls.key|tls.crt)$
+    azure_keyvault: https://kv-mstov-test.vault.azure.net/keys/sops/5de841e201d14a62a04ffbb4d0d03fad

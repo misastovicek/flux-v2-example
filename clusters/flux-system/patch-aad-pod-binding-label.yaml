@@ -1,0 +1,16 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  # The name is not important since patch in kustomization.yaml is applied to all Deployments
+  name: unknown
+spec:
+  template:
+    metadata:
+      labels:
+        aadpodidbinding: kv-access
+    spec:
+      containers:
+      - name: manager
+        env:
+        - name: AZURE_AUTH_METHOD
+          value: msi
