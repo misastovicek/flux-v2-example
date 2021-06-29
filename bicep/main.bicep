@@ -25,3 +25,5 @@ module AksIAM 'aks-nodes-iam.bicep' = {
   }
   scope: resourceGroup('rg-${name}-aksnodes')
 }
+
+output keyVaultSopsKeyUri string = AksResources.outputs.keyVaultSopsKeyUri
